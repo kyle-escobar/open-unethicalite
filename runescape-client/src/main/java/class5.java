@@ -1,38 +1,44 @@
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.MessageDigest;
+
 @ObfuscatedName("w")
 public class class5 implements class2 {
-	@ObfuscatedName("o")
-	final MessageDigest field12 = this.method19();
+	@ObfuscatedName("c")
+	final MessageDigest field11;
 
-	@ObfuscatedSignature(descriptor = "(Lh;)V")
+	@ObfuscatedSignature(
+		descriptor = "(Lm;)V"
+	)
 	class5(class8 var1) {
-	}
-
-	@ObfuscatedName("o")
-	boolean method15(int var1, String var2, long var3) {
-		byte[] var5 = this.method18(var2, var3);
-		return method16(var5) >= var1;
-	}
-
-	@ObfuscatedName("u")
-	byte[] method18(String var1, long var2) {
-		StringBuilder var4 = new StringBuilder();
-		var4.append(var1).append(Long.toHexString(var2));
-		this.field12.reset();
-		try {
-			this.field12.update(var4.toString().getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException var6) {
-			var6.printStackTrace();
-		}
-		return this.field12.digest();
+		this.field11 = this.method31();
 	}
 
 	@ObfuscatedName("c")
-	MessageDigest method19() {
+	boolean method27(int var1, String var2, long var3) {
+		byte[] var5 = this.method30(var2, var3);
+		return method39(var5) >= var1;
+	}
+
+	@ObfuscatedName("n")
+	byte[] method30(String var1, long var2) {
+		StringBuilder var4 = new StringBuilder();
+		var4.append(var1).append(Long.toHexString(var2));
+		this.field11.reset();
+
+		try {
+			this.field11.update(var4.toString().getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException var6) {
+			var6.printStackTrace();
+		}
+
+		return this.field11.digest();
+	}
+
+	@ObfuscatedName("k")
+	MessageDigest method31() {
 		try {
 			return MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException var2) {
@@ -41,23 +47,25 @@ public class class5 implements class2 {
 		}
 	}
 
-	@ObfuscatedName("q")
-	static int method16(byte[] var0) {
+	@ObfuscatedName("p")
+	static int method39(byte[] var0) {
 		int var1 = 0;
 		byte[] var2 = var0;
+
 		for (int var3 = 0; var3 < var2.length; ++var3) {
 			byte var4 = var2[var3];
-			int var5 = method14(var4);
+			int var5 = method36(var4);
 			var1 += var5;
 			if (var5 != 8) {
 				break;
 			}
 		}
+
 		return var1;
 	}
 
 	@ObfuscatedName("f")
-	static int method14(byte var0) {
+	static int method36(byte var0) {
 		int var1 = 0;
 		if (var0 == 0) {
 			var1 = 8;
@@ -66,6 +74,7 @@ public class class5 implements class2 {
 				++var1;
 			}
 		}
+
 		return var1;
 	}
 }

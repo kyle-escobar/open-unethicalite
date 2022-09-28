@@ -1,62 +1,76 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
+import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.ObfuscatedGetter;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("ow")
+
+@ObfuscatedName("ob")
 @Implements("DesktopPlatformInfoProvider")
 public class DesktopPlatformInfoProvider implements PlatformInfoProvider {
-	@ObfuscatedName("u")
-	@ObfuscatedGetter(intValue = 68948625)
-	int field4481;
+	@ObfuscatedName("n")
+	@ObfuscatedGetter(
+		intValue = -573760569
+	)
+	int field4510;
+	@ObfuscatedName("k")
+	@ObfuscatedGetter(
+		intValue = 1346201795
+	)
+	int field4511;
+	@ObfuscatedName("w")
+	@ObfuscatedGetter(
+		intValue = -102397907
+	)
+	int field4508;
 
 	@ObfuscatedName("c")
-	@ObfuscatedGetter(intValue = 1497006229)
-	int field4479;
-
-	@ObfuscatedName("w")
-	@ObfuscatedGetter(intValue = 1905395173)
-	int field4484;
-
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "(I)Lou;", garbageValue = "-1956544923")
+	@ObfuscatedSignature(
+		descriptor = "(I)Los;",
+		garbageValue = "650886261"
+	)
 	@Export("get")
 	public PlatformInfo get() {
 		byte var1;
-		if (class7.formattedOperatingSystemName.startsWith("win")) {
+		if (ItemContainer.formattedOperatingSystemName.startsWith("win")) {
 			var1 = 1;
-		} else if (class7.formattedOperatingSystemName.startsWith("mac")) {
+		} else if (ItemContainer.formattedOperatingSystemName.startsWith("mac")) {
 			var1 = 2;
-		} else if (class7.formattedOperatingSystemName.startsWith("linux")) {
+		} else if (ItemContainer.formattedOperatingSystemName.startsWith("linux")) {
 			var1 = 3;
 		} else {
 			var1 = 4;
 		}
+
 		String var2;
 		try {
 			var2 = System.getProperty("os.arch").toLowerCase();
-		} catch (Exception var30) {
+		} catch (Exception var31) {
 			var2 = "";
 		}
+
 		String var3;
 		try {
 			var3 = System.getProperty("os.version").toLowerCase();
-		} catch (Exception var29) {
+		} catch (Exception var30) {
 			var3 = "";
 		}
+
 		String var4 = "Unknown";
 		String var5 = "1.1";
+
 		try {
 			var4 = System.getProperty("java.vendor");
 			var5 = System.getProperty("java.version");
-		} catch (Exception var28) {
+		} catch (Exception var29) {
 		}
-		boolean var27;
+
+		boolean var28;
 		if (!var2.startsWith("amd64") && !var2.startsWith("x86_64")) {
-			var27 = false;
+			var28 = false;
 		} else {
-			var27 = true;
+			var28 = true;
 		}
+
 		byte var7 = 0;
 		if (var1 == 1) {
 			if (var3.indexOf("4.0") != -1) {
@@ -105,6 +119,7 @@ public class DesktopPlatformInfoProvider implements PlatformInfoProvider {
 				var7 = 29;
 			}
 		}
+
 		byte var8;
 		if (var4.toLowerCase().indexOf("sun") != -1) {
 			var8 = 1;
@@ -117,15 +132,17 @@ public class DesktopPlatformInfoProvider implements PlatformInfoProvider {
 		} else {
 			var8 = 4;
 		}
-		this.method7177(var5);
+
+		this.method7348(var5);
 		boolean var9 = false;
-		int var10 = ((int) (Runtime.getRuntime().maxMemory() / 1048576L)) + 1;
+		int var10 = (int)(Runtime.getRuntime().maxMemory() / 1048576L) + 1;
 		int var11;
-		if (this.field4481 > 3) {
+		if (this.field4510 > 3) {
 			var11 = Runtime.getRuntime().availableProcessors();
 		} else {
 			var11 = 0;
 		}
+
 		byte var12 = 0;
 		String var13 = "";
 		String var14 = "";
@@ -140,42 +157,57 @@ public class DesktopPlatformInfoProvider implements PlatformInfoProvider {
 		int[] var23 = new int[3];
 		boolean var24 = false;
 		String var25 = "";
-		boolean var26 = false;
-		return new PlatformInfo(var1, var27, var7, var8, this.field4481, this.field4479, this.field4484, false, var10, var11, var12, 0, var13, var14, var15, var16, 0, 0, 0, 0, var17, var18, var23, 0, "");
+		String var26 = "";
+		boolean var27 = false;
+		return new PlatformInfo(var1, var28, var7, var8, this.field4510, this.field4511, this.field4508, false, var10, var11, var12, 0, var13, var14, var15, var16, 0, 0, 0, 0, var17, var18, var23, 0, "", "");
 	}
 
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(descriptor = "(Ljava/lang/String;B)V", garbageValue = "3")
-	void method7177(String var1) {
+	@ObfuscatedName("p")
+	@ObfuscatedSignature(
+		descriptor = "(Ljava/lang/String;I)V",
+		garbageValue = "1449212355"
+	)
+	void method7348(String var1) {
 		if (var1.startsWith("1.")) {
-			this.method7179(var1);
+			this.method7358(var1);
 		} else {
-			this.method7185(var1);
+			this.method7350(var1);
 		}
+
 	}
 
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "(Ljava/lang/String;I)V", garbageValue = "-1908249453")
-	void method7179(String var1) {
+	@ObfuscatedSignature(
+		descriptor = "(Ljava/lang/String;I)V",
+		garbageValue = "-414657402"
+	)
+	void method7358(String var1) {
 		String[] var2 = var1.split("\\.");
+
 		try {
-			this.field4481 = Integer.parseInt(var2[1]);
+			this.field4510 = Integer.parseInt(var2[1]);
 			var2 = var2[2].split("_");
-			this.field4479 = Integer.parseInt(var2[0]);
-			this.field4484 = Integer.parseInt(var2[1]);
+			this.field4511 = Integer.parseInt(var2[0]);
+			this.field4508 = Integer.parseInt(var2[1]);
 		} catch (Exception var4) {
 		}
+
 	}
 
-	@ObfuscatedName("u")
-	@ObfuscatedSignature(descriptor = "(Ljava/lang/String;I)V", garbageValue = "464232793")
-	void method7185(String var1) {
+	@ObfuscatedName("n")
+	@ObfuscatedSignature(
+		descriptor = "(Ljava/lang/String;I)V",
+		garbageValue = "-634559037"
+	)
+	void method7350(String var1) {
 		String[] var2 = var1.split("\\.");
+
 		try {
-			this.field4481 = Integer.parseInt(var2[0]);
-			this.field4479 = Integer.parseInt(var2[1]);
-			this.field4484 = Integer.parseInt(var2[2]);
+			this.field4510 = Integer.parseInt(var2[0]);
+			this.field4511 = Integer.parseInt(var2[1]);
+			this.field4508 = Integer.parseInt(var2[2]);
 		} catch (Exception var4) {
 		}
+
 	}
 }

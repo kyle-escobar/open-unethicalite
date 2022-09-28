@@ -1,37 +1,44 @@
-import net.runelite.mapping.ObfuscatedName;
-import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.Implements;
 import java.util.Iterator;
 import net.runelite.mapping.Export;
-@ObfuscatedName("pn")
+import net.runelite.mapping.Implements;
+import net.runelite.mapping.ObfuscatedName;
+import net.runelite.mapping.ObfuscatedSignature;
+
+@ObfuscatedName("ph")
 @Implements("IterableNodeHashTableIterator")
 public class IterableNodeHashTableIterator implements Iterator {
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "Lpl;")
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "Lpq;"
+	)
 	@Export("hashTable")
 	IterableNodeHashTable hashTable;
-
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(descriptor = "Lor;")
+	@ObfuscatedName("p")
+	@ObfuscatedSignature(
+		descriptor = "Lov;"
+	)
 	@Export("head")
 	Node head;
-
 	@ObfuscatedName("f")
 	@Export("index")
 	int index;
-
-	@ObfuscatedName("u")
-	@ObfuscatedSignature(descriptor = "Lor;")
+	@ObfuscatedName("n")
+	@ObfuscatedSignature(
+		descriptor = "Lov;"
+	)
 	@Export("last")
-	Node last = null;
+	Node last;
 
-	@ObfuscatedSignature(descriptor = "(Lpl;)V")
+	@ObfuscatedSignature(
+		descriptor = "(Lpq;)V"
+	)
 	IterableNodeHashTableIterator(IterableNodeHashTable var1) {
+		this.last = null;
 		this.hashTable = var1;
 		this.start();
 	}
 
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@Export("start")
 	void start() {
 		this.head = this.hashTable.buckets[0].previous;
@@ -51,8 +58,10 @@ public class IterableNodeHashTableIterator implements Iterator {
 				if (this.index >= this.hashTable.size) {
 					return null;
 				}
+
 				var1 = this.hashTable.buckets[this.index++].previous;
-			} while (var1 == this.hashTable.buckets[this.index - 1] );
+			} while(var1 == this.hashTable.buckets[this.index - 1]);
+
 			this.head = var1.previous;
 			this.last = var1;
 			return var1;
@@ -68,14 +77,20 @@ public class IterableNodeHashTableIterator implements Iterator {
 					this.head = this.hashTable.buckets[this.index - 1].previous;
 					return true;
 				}
+
 				this.head = this.hashTable.buckets[this.index - 1];
-			} 
+			}
+
 			return false;
 		}
 	}
 
 	public void remove() {
-		this.last.remove();
-		this.last = null;
+		if (this.last == null) {
+			throw new IllegalStateException();
+		} else {
+			this.last.remove();
+			this.last = null;
+		}
 	}
 }

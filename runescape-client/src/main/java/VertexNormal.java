@@ -1,40 +1,49 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
+import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.ObfuscatedGetter;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("hr")
+
+@ObfuscatedName("hw")
 @Implements("VertexNormal")
 public class VertexNormal {
+	@ObfuscatedName("b")
+	@ObfuscatedSignature(
+		descriptor = "Lcu;"
+	)
+	@Export("loginScreenRunesAnimation")
+	static LoginScreenAnimation loginScreenRunesAnimation;
 	@ObfuscatedName("p")
-	@ObfuscatedSignature(descriptor = "Lku;")
-	@Export("scriptDotWidget")
-	static Widget scriptDotWidget;
-
-	@ObfuscatedName("o")
-	@ObfuscatedGetter(intValue = -163617677)
+	@ObfuscatedGetter(
+		intValue = -1936083837
+	)
 	@Export("x")
 	int x;
-
-	@ObfuscatedName("q")
-	@ObfuscatedGetter(intValue = 22061403)
+	@ObfuscatedName("f")
+	@ObfuscatedGetter(
+		intValue = -1468539031
+	)
 	@Export("y")
 	int y;
-
-	@ObfuscatedName("f")
-	@ObfuscatedGetter(intValue = 1595377211)
+	@ObfuscatedName("n")
+	@ObfuscatedGetter(
+		intValue = -498232775
+	)
 	@Export("z")
 	int z;
-
-	@ObfuscatedName("u")
-	@ObfuscatedGetter(intValue = 1156289521)
+	@ObfuscatedName("k")
+	@ObfuscatedGetter(
+		intValue = 1111169615
+	)
 	@Export("magnitude")
 	int magnitude;
 
 	VertexNormal() {
 	}
 
-	@ObfuscatedSignature(descriptor = "(Lhr;)V")
+	@ObfuscatedSignature(
+		descriptor = "(Lhw;)V"
+	)
 	VertexNormal(VertexNormal var1) {
 		this.x = var1.x;
 		this.y = var1.y;
@@ -42,35 +51,23 @@ public class VertexNormal {
 		this.magnitude = var1.magnitude;
 	}
 
-	@ObfuscatedName("jm")
-	@ObfuscatedSignature(descriptor = "(Lku;IIB)V", garbageValue = "-5")
-	@Export("alignWidgetPosition")
-	static void alignWidgetPosition(Widget var0, int var1, int var2) {
-		if (var0.xAlignment == 0) {
-			var0.x = var0.rawX;
-		} else if (var0.xAlignment == 1) {
-			var0.x = var0.rawX + (var1 - var0.width) / 2;
-		} else if (var0.xAlignment == 2) {
-			var0.x = var1 - var0.width - var0.rawX;
-		} else if (var0.xAlignment == 3) {
-			var0.x = var0.rawX * var1 >> 14;
-		} else if (var0.xAlignment == 4) {
-			var0.x = (var0.rawX * var1 >> 14) + (var1 - var0.width) / 2;
-		} else {
-			var0.x = var1 - var0.width - (var0.rawX * var1 >> 14);
-		}
-		if (var0.yAlignment == 0) {
-			var0.y = var0.rawY;
-		} else if (var0.yAlignment == 1) {
-			var0.y = (var2 - var0.height) / 2 + var0.rawY;
-		} else if (var0.yAlignment == 2) {
-			var0.y = var2 - var0.height - var0.rawY;
-		} else if (var0.yAlignment == 3) {
-			var0.y = var2 * var0.rawY >> 14;
-		} else if (var0.yAlignment == 4) {
-			var0.y = (var2 - var0.height) / 2 + (var2 * var0.rawY >> 14);
-		} else {
-			var0.y = var2 - var0.height - (var2 * var0.rawY >> 14);
+	@ObfuscatedName("lj")
+	@ObfuscatedSignature(
+		descriptor = "(IIZI)V",
+		garbageValue = "-2127974658"
+	)
+	static final void method4646(int var0, int var1, boolean var2) {
+		if (Client.currentClanChannels[var0] != null) {
+			if (var1 >= 0 && var1 < Client.currentClanChannels[var0].method3265()) {
+				ClanChannelMember var3 = (ClanChannelMember)Client.currentClanChannels[var0].members.get(var1);
+				PacketBufferNode var4 = class120.getPacketBufferNode(ClientPacket.field3015, Client.packetWriter.isaacCipher);
+				var4.packetBuffer.writeByte(4 + class357.stringCp1252NullTerminatedByteSize(var3.username.getName()));
+				var4.packetBuffer.writeByte(var0);
+				var4.packetBuffer.writeShort(var1);
+				var4.packetBuffer.writeBoolean(var2);
+				var4.packetBuffer.writeStringCp1252NullTerminated(var3.username.getName());
+				Client.packetWriter.addNode(var4);
+			}
 		}
 	}
 }

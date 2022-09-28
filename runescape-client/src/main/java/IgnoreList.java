@@ -1,42 +1,58 @@
+import java.util.Date;
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.ObfuscatedGetter;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("nv")
+
+@ObfuscatedName("nu")
 @Implements("IgnoreList")
 public class IgnoreList extends UserList {
-	@ObfuscatedName("u")
-	@ObfuscatedGetter(intValue = -676945199)
-	static int field4293;
-
+	@ObfuscatedName("al")
+	@Export("client")
+	@ObfuscatedSignature(
+		descriptor = "Lclient;"
+	)
+	static Client client;
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "Lpa;")
+	@ObfuscatedSignature(
+		descriptor = "Lpn;"
+	)
 	@Export("loginType")
 	final LoginType loginType;
 
-	@ObfuscatedSignature(descriptor = "(Lpa;)V")
+	@ObfuscatedSignature(
+		descriptor = "(Lpn;)V"
+	)
 	public IgnoreList(LoginType var1) {
 		super(400);
 		this.loginType = var1;
 	}
 
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "(B)Lnd;", garbageValue = "12")
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "(B)Lnc;",
+		garbageValue = "-25"
+	)
 	@Export("newInstance")
 	User newInstance() {
 		return new Ignored();
 	}
 
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(descriptor = "(II)[Lnd;", garbageValue = "-1607059691")
+	@ObfuscatedName("p")
+	@ObfuscatedSignature(
+		descriptor = "(IB)[Lnc;",
+		garbageValue = "0"
+	)
 	@Export("newTypedArray")
 	User[] newTypedArray(int var1) {
 		return new Ignored[var1];
 	}
 
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "(Lqw;IB)V", garbageValue = "-9")
+	@ObfuscatedSignature(
+		descriptor = "(Lqq;IB)V",
+		garbageValue = "67"
+	)
 	@Export("read")
 	public void read(Buffer var1, int var2) {
 		while (true) {
@@ -47,10 +63,10 @@ public class IgnoreList extends UserList {
 				Username var6 = new Username(var1.readStringCp1252NullTerminated(), this.loginType);
 				var1.readStringCp1252NullTerminated();
 				if (var5 != null && var5.hasCleanName()) {
-					Ignored var7 = ((Ignored) (this.getByCurrentUsername(var5)));
+					Ignored var7 = (Ignored)this.getByCurrentUsername(var5);
 					if (var4) {
-						Ignored var8 = ((Ignored) (this.getByCurrentUsername(var6)));
-						if (var8 != null && var7 != var8) {
+						Ignored var8 = (Ignored)this.getByCurrentUsername(var6);
+						if (var8 != null && var8 != var7) {
 							if (var7 != null) {
 								this.remove(var8);
 							} else {
@@ -58,42 +74,37 @@ public class IgnoreList extends UserList {
 							}
 						}
 					}
+
 					if (var7 != null) {
 						this.changeName(var7, var5, var6);
 						continue;
 					}
+
 					if (this.getSize() < 400) {
 						int var9 = this.getSize();
-						var7 = ((Ignored) (this.addLast(var5, var6)));
+						var7 = (Ignored)this.addLast(var5, var6);
 						var7.id = var9;
 					}
 					continue;
 				}
+
 				throw new IllegalStateException();
 			}
+
 			return;
-		} 
-	}
-
-	@ObfuscatedName("n")
-	@ObfuscatedSignature(descriptor = "(I)V", garbageValue = "1968612284")
-	static void method6630() {
-		class267.SpriteBuffer_xOffsets = null;
-		class457.SpriteBuffer_yOffsets = null;
-		class457.SpriteBuffer_spriteWidths = null;
-		Decimator.SpriteBuffer_spriteHeights = null;
-		GrandExchangeOfferWorldComparator.SpriteBuffer_spritePalette = null;
-		DbTableType.SpriteBuffer_pixels = null;
-	}
-
-	@ObfuscatedName("lp")
-	@ObfuscatedSignature(descriptor = "(Lku;I)Ljava/lang/String;", garbageValue = "2090269770")
-	@Export("Widget_getSpellActionName")
-	static String Widget_getSpellActionName(Widget var0) {
-		if (BoundaryObject.Widget_unpackTargetMask(class67.getWidgetFlags(var0)) == 0) {
-			return null;
-		} else {
-			return var0.spellActionName != null && var0.spellActionName.trim().length() != 0 ? var0.spellActionName : null;
 		}
+	}
+
+	@ObfuscatedName("c")
+	public static String method6781(long var0) {
+		Calendar.Calendar_calendar.setTime(new Date(var0));
+		int var2 = Calendar.Calendar_calendar.get(7);
+		int var3 = Calendar.Calendar_calendar.get(5);
+		int var4 = Calendar.Calendar_calendar.get(2);
+		int var5 = Calendar.Calendar_calendar.get(1);
+		int var6 = Calendar.Calendar_calendar.get(11);
+		int var7 = Calendar.Calendar_calendar.get(12);
+		int var8 = Calendar.Calendar_calendar.get(13);
+		return Calendar.DAYS_OF_THE_WEEK[var2 - 1] + ", " + var3 / 10 + var3 % 10 + "-" + Calendar.MONTH_NAMES_ENGLISH_GERMAN[0][var4] + "-" + var5 + " " + var6 / 10 + var6 % 10 + ":" + var7 / 10 + var7 % 10 + ":" + var8 / 10 + var8 % 10 + " GMT";
 	}
 }

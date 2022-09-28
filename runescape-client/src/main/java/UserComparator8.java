@@ -1,11 +1,12 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("dz")
+
+@ObfuscatedName("df")
 @Implements("UserComparator8")
 public class UserComparator8 extends AbstractUserComparator {
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@Export("reversed")
 	final boolean reversed;
 
@@ -13,8 +14,11 @@ public class UserComparator8 extends AbstractUserComparator {
 		this.reversed = var1;
 	}
 
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "(Lnh;Lnh;I)I", garbageValue = "-1437399450")
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "(Lnr;Lnr;B)I",
+		garbageValue = "-112"
+	)
 	@Export("compareBuddy")
 	int compareBuddy(Buddy var1, Buddy var2) {
 		if (Client.worldId == var1.world) {
@@ -24,15 +28,51 @@ public class UserComparator8 extends AbstractUserComparator {
 		} else if (var2.world == Client.worldId) {
 			return this.reversed ? 1 : -1;
 		}
+
 		return this.compareUser(var1, var2);
 	}
 
 	public int compare(Object var1, Object var2) {
-		return this.compareBuddy(((Buddy) (var1)), ((Buddy) (var2)));
+		return this.compareBuddy((Buddy)var1, (Buddy)var2);
 	}
 
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "(Llc;I)V", garbageValue = "-613643844")
-	public static void method2664(AbstractArchive var0) {
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "(II)I",
+		garbageValue = "1857737872"
+	)
+	@Export("getVarbit")
+	public static int getVarbit(int var0) {
+		VarbitComposition var2 = (VarbitComposition)VarbitComposition.VarbitDefinition_cached.get((long)var0);
+		VarbitComposition var1;
+		if (var2 != null) {
+			var1 = var2;
+		} else {
+			byte[] var3 = VarbitComposition.VarbitDefinition_archive.takeFile(14, var0);
+			var2 = new VarbitComposition();
+			if (var3 != null) {
+				var2.decode(new Buffer(var3));
+			}
+
+			VarbitComposition.VarbitDefinition_cached.put(var2, (long)var0);
+			var1 = var2;
+		}
+
+		int var7 = var1.baseVar;
+		int var4 = var1.startBit;
+		int var5 = var1.endBit;
+		int var6 = Varps.Varps_masks[var5 - var4];
+		return Varps.Varps_main[var7] >> var4 & var6;
+	}
+
+	@ObfuscatedName("d")
+	@ObfuscatedSignature(
+		descriptor = "(B)V",
+		garbageValue = "14"
+	)
+	public static void method2742() {
+		SequenceDefinition.SequenceDefinition_cached.clear();
+		SequenceDefinition.SequenceDefinition_cachedFrames.clear();
+		SequenceDefinition.SequenceDefinition_cachedModel.clear();
 	}
 }

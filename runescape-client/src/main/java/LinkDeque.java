@@ -1,40 +1,50 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("ly")
+
+@ObfuscatedName("mx")
 @Implements("LinkDeque")
 public class LinkDeque {
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "Lod;")
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "Loy;"
+	)
 	@Export("sentinel")
-	Link sentinel = new Link();
-
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(descriptor = "Lod;")
+	Link sentinel;
+	@ObfuscatedName("p")
+	@ObfuscatedSignature(
+		descriptor = "Loy;"
+	)
 	@Export("current")
 	Link current;
 
 	public LinkDeque() {
+		this.sentinel = new Link();
 		this.sentinel.previous = this.sentinel;
 		this.sentinel.next = this.sentinel;
 	}
 
-	@ObfuscatedName("o")
-	@ObfuscatedSignature(descriptor = "(Lod;)V")
+	@ObfuscatedName("c")
+	@ObfuscatedSignature(
+		descriptor = "(Loy;)V"
+	)
 	@Export("addFirst")
 	public void addFirst(Link var1) {
 		if (var1.next != null) {
 			var1.remove();
 		}
+
 		var1.next = this.sentinel.next;
 		var1.previous = this.sentinel;
 		var1.next.previous = var1;
 		var1.previous.next = var1;
 	}
 
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(descriptor = "()Lod;")
+	@ObfuscatedName("p")
+	@ObfuscatedSignature(
+		descriptor = "()Loy;"
+	)
 	@Export("last")
 	public Link last() {
 		Link var1 = this.sentinel.previous;
@@ -48,7 +58,9 @@ public class LinkDeque {
 	}
 
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "()Lod;")
+	@ObfuscatedSignature(
+		descriptor = "()Loy;"
+	)
 	@Export("previous")
 	public Link previous() {
 		Link var1 = this.current;

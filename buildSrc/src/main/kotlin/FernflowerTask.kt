@@ -26,7 +26,7 @@ open class FernflowerTask: DefaultTask() {
 
     @InputFile
     @PathSensitive(PathSensitivity.ABSOLUTE)
-    var getInputJar = project.file(inputJar ?: "${project.buildDir}/libs/${project.name}-${project.version}.jar")
+    var getInputJar = project.file(inputJar ?: "${project.buildDir}/libs/remapped-${project.version}.jar")
 
     @OutputDirectory
     var getOutputDir = project.file(outputDir ?: "${project.buildDir}/decompiled-sources")

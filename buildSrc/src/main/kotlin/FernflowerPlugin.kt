@@ -11,7 +11,7 @@ class FernflowerPlugin : Plugin<Project> {
 
             doFirst {
                 if (!project.tasks.getByName("jar").didWork) {
-                    throw StopExecutionException()
+                    //throw StopExecutionException()
                 }
             }
         }

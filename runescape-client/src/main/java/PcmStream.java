@@ -1,57 +1,64 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("ae")
+
+@ObfuscatedName("ay")
 @Implements("PcmStream")
 public abstract class PcmStream extends Node {
 	@ObfuscatedName("w")
 	@Export("active")
-	volatile boolean active = true;
-
-	@ObfuscatedName("l")
-	@ObfuscatedSignature(descriptor = "Lae;")
+	volatile boolean active;
+	@ObfuscatedName("b")
+	@ObfuscatedSignature(
+		descriptor = "Lay;"
+	)
 	@Export("after")
 	PcmStream after;
-
-	@ObfuscatedName("y")
-	int field354;
-
-	@ObfuscatedName("k")
-	@ObfuscatedSignature(descriptor = "Lbv;")
+	@ObfuscatedName("a")
+	int field360;
+	@ObfuscatedName("l")
+	@ObfuscatedSignature(
+		descriptor = "Lbv;"
+	)
 	@Export("sound")
 	AbstractSound sound;
 
 	protected PcmStream() {
+		this.active = true;
 	}
 
 	@ObfuscatedName("w")
-	@ObfuscatedSignature(descriptor = "()Lae;")
+	@ObfuscatedSignature(
+		descriptor = "()Lay;"
+	)
 	@Export("firstSubStream")
 	protected abstract PcmStream firstSubStream();
 
-	@ObfuscatedName("z")
-	@ObfuscatedSignature(descriptor = "()Lae;")
+	@ObfuscatedName("s")
+	@ObfuscatedSignature(
+		descriptor = "()Lay;"
+	)
 	@Export("nextSubStream")
 	protected abstract PcmStream nextSubStream();
 
-	@ObfuscatedName("j")
-	protected abstract int vmethod5453();
+	@ObfuscatedName("q")
+	protected abstract int vmethod5612();
 
-	@ObfuscatedName("h")
+	@ObfuscatedName("m")
 	@Export("fill")
 	protected abstract void fill(int[] var1, int var2, int var3);
 
-	@ObfuscatedName("d")
+	@ObfuscatedName("j")
 	@Export("skip")
 	protected abstract void skip(int var1);
 
-	@ObfuscatedName("at")
-	int vmethod959() {
+	@ObfuscatedName("af")
+	int vmethod1015() {
 		return 255;
 	}
 
-	@ObfuscatedName("eg")
+	@ObfuscatedName("fo")
 	@Export("update")
 	final void update(int[] var1, int var2, int var3) {
 		if (this.active) {
@@ -59,5 +66,6 @@ public abstract class PcmStream extends Node {
 		} else {
 			this.skip(var3);
 		}
+
 	}
 }

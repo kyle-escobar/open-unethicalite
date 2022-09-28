@@ -1,39 +1,44 @@
+import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.mapping.Implements;
-import net.runelite.mapping.Export;
-@ObfuscatedName("id")
+
+@ObfuscatedName("it")
 @Implements("DemotingHashTable")
 public final class DemotingHashTable {
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@Export("capacity")
 	int capacity;
-
-	@ObfuscatedName("q")
+	@ObfuscatedName("p")
 	@Export("remaining")
 	int remaining;
-
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "Lpl;")
+	@ObfuscatedSignature(
+		descriptor = "Lpq;"
+	)
 	@Export("hashTable")
 	IterableNodeHashTable hashTable;
-
-	@ObfuscatedName("u")
-	@ObfuscatedSignature(descriptor = "Lme;")
+	@ObfuscatedName("n")
+	@ObfuscatedSignature(
+		descriptor = "Lmt;"
+	)
 	@Export("queue")
 	IterableDualNodeQueue queue;
-
-	@ObfuscatedName("c")
-	@ObfuscatedSignature(descriptor = "Liv;")
-	class252 field2886;
+	@ObfuscatedName("k")
+	@ObfuscatedSignature(
+		descriptor = "Lix;"
+	)
+	class253 field2919;
 
 	public DemotingHashTable(int var1, int var2) {
 		this.queue = new IterableDualNodeQueue();
 		this.capacity = var1;
 		this.remaining = var1;
+
 		int var3;
 		for (var3 = 1; var3 + var3 < var1 && var3 < var2; var3 += var3) {
 		}
+
 		this.hashTable = new IterableNodeHashTable(var3);
 	}
 
@@ -41,10 +46,10 @@ public final class DemotingHashTable {
 		this(var1, var1);
 	}
 
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@Export("get")
 	public Object get(long var1) {
-		Wrapper var3 = ((Wrapper) (this.hashTable.get(var1)));
+		Wrapper var3 = (Wrapper)this.hashTable.get(var1);
 		if (var3 == null) {
 			return null;
 		} else {
@@ -66,20 +71,23 @@ public final class DemotingHashTable {
 					this.queue.add(var3);
 					var3.keyDual = 0L;
 				}
+
 				return var4;
 			}
 		}
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("p")
 	@Export("remove")
 	void remove(long var1) {
-		Wrapper var3 = ((Wrapper) (this.hashTable.get(var1)));
+		Wrapper var3 = (Wrapper)this.hashTable.get(var1);
 		this.removeWrapper(var3);
 	}
 
 	@ObfuscatedName("f")
-	@ObfuscatedSignature(descriptor = "(Liq;)V")
+	@ObfuscatedSignature(
+		descriptor = "(Liz;)V"
+	)
 	@Export("removeWrapper")
 	void removeWrapper(Wrapper var1) {
 		if (var1 != null) {
@@ -87,14 +95,15 @@ public final class DemotingHashTable {
 			var1.removeDual();
 			this.remaining += var1.size;
 		}
+
 	}
 
-	@ObfuscatedName("u")
-	public void method5125(Object var1, long var2) {
+	@ObfuscatedName("n")
+	public void method5282(Object var1, long var2) {
 		this.put(var1, var2, 1);
 	}
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("k")
 	@Export("put")
 	public void put(Object var1, long var2, int var4) {
 		if (var4 > this.capacity) {
@@ -102,18 +111,22 @@ public final class DemotingHashTable {
 		} else {
 			this.remove(var2);
 			this.remaining -= var4;
+
 			while (this.remaining < 0) {
-				Wrapper var5 = ((Wrapper) (this.queue.removeLast()));
+				Wrapper var5 = (Wrapper)this.queue.removeLast();
 				if (var5 == null) {
 					throw new RuntimeException("");
 				}
+
 				if (!var5.isSoft()) {
 				}
+
 				this.removeWrapper(var5);
-				if (this.field2886 != null) {
-					this.field2886.method5121(var5.get());
+				if (this.field2919 != null) {
+					this.field2919.method5260(var5.get());
 				}
-			} 
+			}
+
 			DirectWrapper var6 = new DirectWrapper(var1, var4);
 			this.hashTable.put(var6, var2);
 			this.queue.add(var6);
@@ -124,14 +137,14 @@ public final class DemotingHashTable {
 	@ObfuscatedName("w")
 	@Export("demote")
 	public void demote(int var1) {
-		for (Wrapper var2 = ((Wrapper) (this.queue.last())); var2 != null; var2 = ((Wrapper) (this.queue.previous()))) {
+		for (Wrapper var2 = (Wrapper)this.queue.last(); var2 != null; var2 = (Wrapper)this.queue.previous()) {
 			if (var2.isSoft()) {
 				if (var2.get() == null) {
 					var2.remove();
 					var2.removeDual();
 					this.remaining += var2.size;
 				}
-			} else if (++var2.keyDual > ((long) (var1))) {
+			} else if (++var2.keyDual > (long)var1) {
 				SoftWrapper var3 = new SoftWrapper(var2.get(), var2.size);
 				this.hashTable.put(var3, var2.key);
 				IterableDualNodeQueue.DualNodeDeque_addBefore(var3, var2);
@@ -139,9 +152,10 @@ public final class DemotingHashTable {
 				var2.removeDual();
 			}
 		}
+
 	}
 
-	@ObfuscatedName("z")
+	@ObfuscatedName("s")
 	@Export("clear")
 	public void clear() {
 		this.queue.clear();
