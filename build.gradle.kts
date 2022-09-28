@@ -37,7 +37,7 @@ buildscript {
     dependencies {
         classpath("org.ajoberstar.grgit:grgit-core:4.1.0")
         classpath("com.openosrs:script-assembler-plugin:1.0.1")
-        classpath("com.openosrs:injector-plugin:2.0.5.3")
+        classpath("net.unethicalite:injector-plugin:2.0.0")
     }
 }
 
@@ -123,9 +123,8 @@ subprojects {
 
     configure<PublishingExtension> {
         repositories {
-            maven {
-                url = uri("$buildDir/repo")
-            }
+            mavenLocal()
+            maven { url = uri("$buildDir/repo") }
             if (System.getenv("REPO_URL") != null) {
                 maven {
                     url = uri(System.getenv("REPO_URL"))

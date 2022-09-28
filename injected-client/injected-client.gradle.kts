@@ -29,7 +29,7 @@ apply<FernflowerPlugin>()
 description = "Injected Client"
 
 plugins {
-    id("com.openosrs.injector")
+    id("net.unethicalite.injector")
 }
 
 val vanillaDep by configurations.creating
